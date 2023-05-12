@@ -49,10 +49,10 @@ export const Chat = ({form}) => {
   }, [getData])
 
   return <div className={Styles.container}>
-    <h2>Номер: +{form.phone}</h2>
+    <h2>Собеседник: {form.phone}</h2>
     <div ref={chatRef} className={Styles.chat}>
       {messages.map((msg, index) => {
-        return <Message msg={msg} index={index} chatRef={chatRef}/>
+        return <Message key={index} msg={msg} index={index} chatRef={chatRef}/>
       })}
     </div>
     <div className={Styles.actionsWrap}>
@@ -66,6 +66,7 @@ export const Chat = ({form}) => {
         variant="outlined"
         className={Styles.button}
         onClick={sendHandler}
+        disabled={!text.length}
       >
         SEND
       </Button>

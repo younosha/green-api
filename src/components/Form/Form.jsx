@@ -21,6 +21,7 @@ export const Form = ({saveClick, form, setForm}) => {
       label="Номер" 
       variant="outlined" 
       value={form.phone}
+      inputProps={{ maxLength: 11 }}
       onChange={e => setForm((prevState) => ({...prevState, phone: e.target.value}))}
     />
     <Button 
