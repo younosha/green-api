@@ -1,0 +1,7 @@
+.container {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 70%;
+}
