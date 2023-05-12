@@ -14,7 +14,7 @@ export const Chat = ({form}) => {
     sendMessage(form.idInstance, form.apiTokenInstance, `${form.phone}@c.us`, text);
     setMessages(prev => [...prev, {
       text: text,
-      from :false
+      from: false
     }]);
     setText('');
     setTimeout(() => chatRef.current.scrollTo({
@@ -27,17 +27,15 @@ export const Chat = ({form}) => {
     getMessage(form.idInstance, form.apiTokenInstance).then(res => {
       if (res) {
         deleteMessage(form.idInstance, form.apiTokenInstance, res.receiptId)
-        if (res.body.senderData && res.body.messageData) {
-          if (res.body.senderData.chatId === `${form.phone}@c.us` && res.body.messageData.typeMessage === 'textMessage') {
-            setMessages(prev => [...prev, {
-              text: res.body.messageData.textMessageData.textMessage,
-              from: true
-            }]);
-            setTimeout(() => chatRef.current.scrollTo({
-              top: chatRef.current.scrollHeight,
-              behavior: "smooth"
-            }), 0);
-          }
+        if (res.body.senderData && res.body.messageData && res.body.senderData.chatId === `${form.phone}@c.us` && res.body.messageData.typeMessage === 'textMessage') {
+          setMessages(prev => [...prev, {
+            text: res.body.messageData.textMessageData.textMessage,
+            from: true
+          }]);
+          setTimeout(() => chatRef.current.scrollTo({
+            top: chatRef.current.scrollHeight,
+            behavior: "smooth"
+          }), 0);
         }
       }
     })
@@ -45,7 +43,6 @@ export const Chat = ({form}) => {
 
   useEffect(() => {
     const interval = setInterval(() => getData(), 5000);
-
     return () => {
       clearInterval(interval)
     }

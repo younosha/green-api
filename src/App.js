@@ -5,9 +5,9 @@ import { useState } from 'react';
 function App() {
   const [page, setPage] = useState(0);
   const [form, setForm] = useState({
-    idInstance: '1101818494',
-    apiTokenInstance: 'd3e84812f1fb4bb7af08f480c963b04c8128c1709f6946fa9e',
-    phone: '79897154276',
+    idInstance: '',
+    apiTokenInstance: '',
+    phone: '',
   });
 
   return (
