@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Styles from './Chat.module.css';
 import Button from '@mui/material/Button';
 import { Message } from '../Message/Message';
@@ -23,7 +23,7 @@ export const Chat = ({form}) => {
     }), 0);
   }
 
-  const getData = () => {
+  const getData = useCallback(() => {
     getMessage(form.idInstance, form.apiTokenInstance).then(res => {
       if (res) {
         deleteMessage(form.idInstance, form.apiTokenInstance, res.receiptId)
@@ -39,14 +39,14 @@ export const Chat = ({form}) => {
         }
       }
     })
-  }
+  }, [form.apiTokenInstance, form.idInstance, form.phone]);
 
   useEffect(() => {
     const interval = setInterval(() => getData(), 5000);
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [getData])
 
   return <div className={Styles.container}>
     <h2>Номер: +{form.phone}</h2>
